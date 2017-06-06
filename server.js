@@ -119,13 +119,13 @@ app.post('/donate', function(req, res) {
     );
 });
 
-app.post('/receive', function(req, res) {
+app.get('/receive', function(req, res) {
     collection.find().toArray(
         function(err, resultArray) {
-            res.sent(resultArray)
+            res.send(resultArray)
         }
-    )
-})
+    );
+});
 
 // {
 //     "foodType: "",
