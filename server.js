@@ -14,7 +14,7 @@ app.use(express.static('static'));
 
 mongodb.connect(uri, function(err, database) {
    db = database;
-   collection = db.collection('jokes');
+   collection = db.collection('foodbank');
 
     app.listen(process.env.PORT || port, function() {
         console.log("Listening on " + port);
@@ -109,3 +109,31 @@ app.delete('/deletejoke', function(req, res) {
         }
     );
 });
+
+
+app.post('/donate', function(req, res) {
+    collection.insertOne(req.body,
+        function(err, results){
+            res.send(results);
+        }
+    );
+});
+
+app.post('/receive', function(req, res) {
+    collection.find().toArray(
+        function(err, resultArray) {
+            res.sent(resultArray)
+        }
+    )
+})
+
+// {
+//     "foodType: "",
+//     "expiryDate": "",
+//     "address": "",
+//     "imageURL": "",
+// }
+
+
+
+
