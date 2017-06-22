@@ -7,6 +7,8 @@ var port = 8888;
 var db, collection;
 
 var uri = "mongodb://" + process.env.MONGOLAB_USER + ":" + process.env.MONGOLAB_PASSWORD + "@ds023485.mlab.com:23485/webdev";
+
+
 var jokes=[{setup:"Our wedding was so beautiful,",punchline:"even the cake was in tiers", votes: 0},{setup:"I'm reading a book on the history of glue",punchline:"I just can't seem to put it down", votes: 0},{setup:"What do you call an Argentinian with a rubber toe?",punchline:"Roberto", votes: 0}];
 
 app.use(bodyParser.json());
@@ -126,6 +128,15 @@ app.get('/receive', function(req, res) {
         }
     );
 });
+
+app.get('/receive/:id', function(req, res) {
+    //res.send(req.params.id)
+    var item = collection.findOne({
+        "_id": new ObjectId(req.params.id)
+    }, function (err, doc) {
+        res.send(doc)
+    });
+})
 
 // {
 //     "foodType: "",
