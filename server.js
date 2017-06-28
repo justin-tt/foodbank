@@ -138,6 +138,18 @@ app.get('/receive/:id', function(req, res) {
     });
 })
 
+app.put('/collect/:id', function(req, res) {
+    var itemIndex = req.params.id;
+    collection.findOneAndUpdate(
+        { "_id": new ObjectId(req.params.id) },
+        { $set: { "collectedAt" :  req.body.collectedAt }},
+        function(err, result) {
+            
+            res.send(result);
+        }
+    );
+})
+
 // {
 //     "foodType: "",
 //     "expiryDate": "",
