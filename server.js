@@ -142,7 +142,12 @@ app.put('/collect/:id', function(req, res) {
     var itemIndex = req.params.id;
     collection.findOneAndUpdate(
         { "_id": new ObjectId(req.params.id) },
-        { $set: { "collectedAt" :  req.body.collectedAt }},
+        { $set: { 
+            { 
+                "collectedAt" :  req.body.collectedAt,
+                "status": "collected"
+            }
+        }},
         function(err, result) {
             
             res.send(result);
@@ -155,6 +160,7 @@ app.put('/collect/:id', function(req, res) {
 //     "expiryDate": "",
 //     "address": "",
 //     "imageURL": "",
+//     "status": "",
 // }
 
 
