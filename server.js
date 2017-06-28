@@ -142,12 +142,13 @@ app.put('/collect/:id', function(req, res) {
     var itemIndex = req.params.id;
     collection.findOneAndUpdate(
         { "_id": new ObjectId(req.params.id) },
-        { $set: { 
+        { $set: 
             { 
+                
                 "collectedAt" :  req.body.collectedAt,
                 "status": "collected"
             }
-        }},
+        },
         function(err, result) {
             
             res.send(result);
