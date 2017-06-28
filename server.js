@@ -122,7 +122,7 @@ app.post('/donate', function(req, res) {
 });
 
 app.get('/receive', function(req, res) {
-    collection.find().toArray(
+    collection.find({ status: "uncollected" }).toArray(
         function(err, resultArray) {
             res.send(resultArray)
         }
